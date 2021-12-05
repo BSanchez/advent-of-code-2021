@@ -29,9 +29,19 @@ defmodule AdventOfCode do
   """
 
   def inputs(day) do
-    day_to_string = Integer.to_string(day) |> String.pad_leading(2, "0")
+    options = OptionParser.parse(System.argv, strict: [example: :boolean]) |> elem(0)
 
-    File.read!("inputs/#{day_to_string}.input") |> String.split("\n", trim: true)
+    day_to_string = Integer.to_string(day) |> String.pad_leading(2, "0")
+    type = if (options[:example]), do: "example", else: "input"
+
+    File.read!("inputs/#{day_to_string}.#{type}") |> String.split("\n", trim: true)
+  end
+
+  def example(day) do
+    day_to_string = Integer.to_string(day) |> String.pad_leading(2, "0")
+    type = "example"
+
+    File.read!("inputs/#{day_to_string}.#{type}") |> String.split("\n", trim: true)
   end
 
   def display_solution(solution), do: display_solution(solution, 0)
