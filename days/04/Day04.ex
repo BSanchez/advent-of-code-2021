@@ -1,10 +1,31 @@
 defmodule Day04 do
   @moduledoc """
-  TODO trouver comment fonctionne cette histoire de documentation
+  We will need to play bingo with a giant squid. And we will cheat.
+
+  ## I DO BE DUMB
+
+  This exercice was HELL. Worst, it was hell for nothing. 
+
+  For the first part, I lost at least 1 hour figuring 0 is an available number 
+  in bingo, so replacing already picked numbers by 0 on my boards will do wonders 
+  when I will need to sum, but it will also make boards finish too early in some 
+  situations.
+
+  For the part two, I derped again, and lost way to much time figuring I need to
+  wait until the last board win before calculating it's score.
+
+  ## Using CLI arguments
+
+  For helping the debug, I created a way to load an alternative input file name
+  (for example inputs/04.example) with Option.parser.
+
+  ```elixir
+    options = OptionParser.parse(System.argv, strict: [example: :boolean]) |> elem(0)
+    type = if (options[:example]), do: "example", else: "input"
+  ```
   """
 
-  @doc """
-  """
+  @doc false
   def inputs do
     [drawn_number_input | boards_input] = AdventOfCode.inputs(4)
     
@@ -18,7 +39,9 @@ defmodule Day04 do
 
   # Mes fonctions pour interragir avec la board.
   def get_boards(list), do: get_boards(list, [])
-  def get_boards([a, b, c, d, e | tail], boards) do
+
+  @doc false
+  defp get_boards([a, b, c, d, e | tail], boards) do
     new_board = [a, b, c, d, e] 
       |> Enum.join(" ")
       |> String.split(" ", trim: true)
@@ -28,15 +51,13 @@ defmodule Day04 do
 
     get_boards(tail, boards)
   end
-  def get_boards([], boards), do: boards
+
+  @doc false
+  defp get_boards([], boards), do: boards
 
   def cross_number_on_board(board, number) do
     Enum.map(board, fn n -> if n == number, do: -1, else: n end)
   end
-
-  # def cross_number_on_all_boards(boards, number) do
-  #   Enum.map(boards, fn board -> cross_number_on_board(board, number) end)
-  # end
 
   def get_row(board, rowNumber) do
     Enum.slice(board, rowNumber * 5, 5)
@@ -57,8 +78,12 @@ defmodule Day04 do
   end
 
   def is_board_completed?(board), do: is_board_completed?(board, 0)
-  def is_board_completed?(_board, 10), do: false
-  def is_board_completed?(board, row_col_index) do
+
+  @doc false
+  defp is_board_completed?(_board, 10), do: false
+
+  @doc false
+  defp is_board_completed?(board, row_col_index) do
     sample = if row_col_index < 5 do
       get_row(board, row_col_index)
     else
@@ -68,8 +93,8 @@ defmodule Day04 do
     if is_row_or_col_completed?(sample),
       do: true,
       else: is_board_completed?(board, row_col_index + 1)
-
   end
+
   def draw_board(board) do
     board 
       |> Enum.map(fn n -> 
