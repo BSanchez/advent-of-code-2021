@@ -48,6 +48,7 @@ defmodule AdventOfCode.MixProject do
       day04: ["run days/04/exercice.exs"],
       day05: ["run days/05/exercice.exs"],
       day06: ["run days/06/exercice.exs"],
+      day07: ["run days/07/exercice.exs"],
     ]
   end
 end
