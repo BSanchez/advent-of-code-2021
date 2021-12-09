@@ -34,7 +34,7 @@ defmodule Day08 do
     dictionary = signal_pattern |> get_dictionary
 
     four_digit_output
-      |> map(fn d -> find(dictionary, fn { key, n } -> same_set?(n, d) end) |> elem(0) end)
+      |> map(fn d -> find(dictionary, fn { _key, n } -> same_set?(n, d) end) |> elem(0) end)
       |> Enum.join
       |> Integer.parse
       |> elem(0)
