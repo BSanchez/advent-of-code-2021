@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.26.0">
+    <meta name="project" content="Advent of code v2021.3.1">
+
+    <title>Day02 — Advent of code v2021.3.1</title>
+    <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
+
+    <script src="dist/sidebar_items-4ebcb18ef0.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-a404e1e870b77c874f9e.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="http://bsanchez.github.io/advent-of-code-2021" class="sidebar-projectName" translate="no">
+Advent of code
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v2021.3.1
+      </strong>
+    </div>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+  <span translate="no">Day02</span> 
+  <small class="app-vsn" translate="no">(Advent of code v2021.3.1)</small>
+
+    <a href="https://github.com/BSanchez/advent-of-code-2021.git/blob/main/days/02/Day02.ex#L1" title="View Source" class="view-source" rel="help">
+      <span class="icon-code" aria-hidden="true"></span>
+      <span class="sr-only">View Source</span>
+    </a>
+
+
+</h1>
+
+
+  <section id="moduledoc">
+<p>Yesterday we have read the scanner, now we need to nearn how to pilote the
+submarine. For that, we will need to parse each line as a couple of values, and
+reducing this new array. Easy enough I guess.</p><h2 id="module-elixir-scopes" class="section-heading">
+  <a href="#module-elixir-scopes" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Elixir scopes
+</h2>
+<p>I don't know how I've not stumbled on this topic yesterday, but scopes in elixir
+are strict. I mean, REALLY strict : It's not possible to update a variable inside
+a if.</p><p>Without this problem I could have used a case, but I need to use 3 ifs
+instead.</p><pre><code class="makeup elixir"><span class="w">  </span><span class="n">hPos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">command_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;forward&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">hPos</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="n">hPos</span><span class="w">
+  </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">command_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;down&quot;</span><span class="w">  </span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="n">depth</span><span class="w">
+  </span><span class="n">depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">command_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;up&quot;</span><span class="w">    </span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="n">depth</span></code></pre><p>Outside of this problem of scopes nothing much to see here, and the second part
+is globally the same.</p>
+  </section>
+
+
+
+      <footer class="footer">
+
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.26.0) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire" translate="no">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button display-settings">
+            Settings
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>

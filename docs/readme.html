@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.26.0">
+    <meta name="project" content="Advent of code v2021.3.1">
+
+    <title>ADVENT OF CODE 2021 — Advent of code v2021.3.1</title>
+    <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
+
+    <script src="dist/sidebar_items-4ebcb18ef0.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-a404e1e870b77c874f9e.js"></script>
+
+
+  </head>
+  <body data-type="extras">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="http://bsanchez.github.io/advent-of-code-2021" class="sidebar-projectName" translate="no">
+Advent of code
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v2021.3.1
+      </strong>
+    </div>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1 id="content">
+ADVENT OF CODE 2021
+
+    <a href="https://github.com/BSanchez/advent-of-code-2021.git/blob/main/README.md#L1" title="View Source" class="view-source" rel="help">
+      <span class="icon-code" aria-hidden="true"></span>
+      <span class="sr-only">View Source</span>
+    </a>
+
+</h1>
+
+<p>Santa's elven have failed hard (like any other year) and we need to get the
+sleigh keys back from the bottom of the ocean. And for this we will need to read
+a file, parse and loop over values intil we get them back !</p><h2 id="why-this-devblog" class="section-heading">
+  <a href="#why-this-devblog" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Why this devblog
+</h2>
+<p>Advent of code is one of my favorit part of the year for discovering new
+technologies or focusing hard on things I know but don't use as much as I want.</p><p>Last year I've done all the exercices in Neovim, it was fun and I really regret
+not having kept a devblog. This year, for sake of keeping traces and don't 
+regret it later I will keep trace of everything I do !</p><h2 id="language-of-choice-for-this-year-elixir" class="section-heading">
+  <a href="#language-of-choice-for-this-year-elixir" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Language of choice for this year : Elixir
+</h2>
+<p>This year, my choice is... Elixir ! As I write today, I'v never touched Elixir. 
+I know it's functionnal, it run on Erlang VM, and that's pretty much it.</p><p>So let's start with <a href="Day01.html"><code class="inline">Day01</code></a> !</p><h2 id="notes-about-this-devblog-repo" class="section-heading">
+  <a href="#notes-about-this-devblog-repo" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Notes about this devblog/repo
+</h2>
+<p>Blog posts are written on the day I complete a challenge, and generally at the
+same time, do don't be triggered by present/past/futur mixing of the phrases.</p><p>I will make a iron rull about letting the solutions as they are. I have already
+done some refactoring and I guess I will do some other, but it will only affect
+meta and organisations. Dirty solutions will remain dirty, but by the end of the
+challenge I hope my progress will be clear.</p>
+<div class="bottom-actions">
+  <div class="bottom-actions-item">
+
+  </div>
+  <div class="bottom-actions-item">
+
+  </div>
+</div>
+
+      <footer class="footer">
+
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.26.0) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire" translate="no">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button display-settings">
+            Settings
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>

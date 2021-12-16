@@ -13,13 +13,14 @@ defmodule AdventOfCode.MixProject do
 
       # Docs
       name: "Advent of code",
-      source_url: "https://github.com/bsanchez/PROJECT",
-      homepage_url: "http://YOUR_PROJECT_HOMEPAGE",
+      source_url: "https://github.com/BSanchez/advent-of-code-2021.git",
+      homepage_url: "http://bsanchez.github.io/advent-of-code-2021",
       docs: [
         api_reference: false,
         main: "readme", # The main page in the docs
         # logo: "path/to/logo.png",
         extras: ["README.md"],
+        output: "docs"
       ]
     ]
   end

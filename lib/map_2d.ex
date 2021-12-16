@@ -1,7 +1,5 @@
 defmodule Map2D do
-  @moduledoc """
-  Récupération de ce qui a été fait Day09
-  """
+  @moduledoc false
 
   import Enum
 

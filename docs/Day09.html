@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.26.0">
+    <meta name="project" content="Advent of code v2021.3.1">
+
+    <title>Day09 — Advent of code v2021.3.1</title>
+    <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
+
+    <script src="dist/sidebar_items-4ebcb18ef0.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-a404e1e870b77c874f9e.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="http://bsanchez.github.io/advent-of-code-2021" class="sidebar-projectName" translate="no">
+Advent of code
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v2021.3.1
+      </strong>
+    </div>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+  <span translate="no">Day09</span> 
+  <small class="app-vsn" translate="no">(Advent of code v2021.3.1)</small>
+
+    <a href="https://github.com/BSanchez/advent-of-code-2021.git/blob/main/days/09/Day09.ex#L1" title="View Source" class="view-source" rel="help">
+      <span class="icon-code" aria-hidden="true"></span>
+      <span class="sr-only">View Source</span>
+    </a>
+
+
+</h1>
+
+
+  <section id="moduledoc">
+<p>Today, we need to find the lowest points of a heightmap.</p><p>Lazy me want to make a simple &quot;get_altitude&quot; and check neighbors of each points, 
+even if I could optimise much further. I hope it will not backfire during part 2.</p><h2 id="module-finding-bassins" class="section-heading">
+  <a href="#module-finding-bassins" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Finding bassins
+</h2>
+<p>Part 2 ask us to find areas where water will &quot;flow&quot; to the lower points. As we know
+at leash 1 point per zone (the lower point), we will use an area fill algorithm.</p><h2 id="module-unexpectedly-hard" class="section-heading">
+  <a href="#module-unexpectedly-hard" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Unexpectedly hard
+</h2>
+<p>The implementation was unexpectedly hard and the result unexpectedly smelly.
+Clearly my problem here is my usage of tuple and the planning/naming/ordering of 
+my functions. </p><p>There is still much to learn, and I am looknig forward the end of
+this advent of code, when my &quot;No tuto&quot; restriction will come off. Elixir is a
+really good language, definetly the best pick I could have done.</p>
+  </section>
+
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <span class="icon-link" aria-hidden="true"></span>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#assign_point_to_bassin/3" translate="no">assign_point_to_bassin(arg1, arg2, bassin_id)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fill_bassin/3" translate="no">fill_bassin(map, coords, bassin_id)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#get_altitude/2" translate="no">get_altitude(arg1, arg2)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#get_bassin_id/2" translate="no">get_bassin_id(arg1, arg2)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#get_lower_points/1" translate="no">get_lower_points(map)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#get_neighbors_altitude/2" translate="no">get_neighbors_altitude(arg, map)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#get_neighbors_coords/2" translate="no">get_neighbors_coords(arg1, arg2)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#is_lower_point?/2" translate="no">is_lower_point?(point, map)</a>
+
+        </div>
+
+      </div>
+
+  </div>
+
+  </section>
+
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <span class="icon-link" aria-hidden="true"></span>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Functions
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="assign_point_to_bassin/3">
+
+  <div class="detail-header">
+    <a href="#assign_point_to_bassin/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">assign_point_to_bassin(arg1, arg2, bassin_id)</h1>
+
+      <a href="https://github.com/BSanchez/advent-of-code-2021.git/blob/main/days/09/Day09.ex#L98" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fill_bassin/3">
+
+  <div class="detail-header">
+    <a href="#fill_bassin/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fill_bassin(map, coords, bassin_id)</h1>
+
+      <a href="https://github.com/BSanchez/advent-of-code-2021.git/blob/main/days/09/Day09.ex#L81" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="get_altitude/2">
+
+  <div class="detail-header">
+    <a href="#get_altitude/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">get_altitude(arg1, arg2)</h1>
+
+      <a href="https://github.com/BSanchez/advent-of-code-2021.git/blob/main/days/09/Day09.ex#L42" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="get_bassin_id/2">
+
+  <div class="detail-header">
+    <a href="#get_bassin_id/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">get_bassin_id(arg1, arg2)</h1>
+
+      <a href="https://github.com/BSanchez/advent-of-code-2021.git/blob/main/days/09/Day09.ex#L46" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="get_lower_points/1">
+
+  <div class="detail-header">
+    <a href="#get_lower_points/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">get_lower_points(map)</h1>
+
+      <a href="https://github.com/BSanchez/advent-of-code-2021.git/blob/main/days/09/Day09.ex#L66" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="get_neighbors_altitude/2">
+
+  <div class="detail-header">
+    <a href="#get_neighbors_altitude/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">get_neighbors_altitude(arg, map)</h1>
+
+      <a href="https://github.com/BSanchez/advent-of-code-2021.git/blob/main/days/09/Day09.ex#L55" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="get_neighbors_coords/2">
+
+  <div class="detail-header">
+    <a href="#get_neighbors_coords/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">get_neighbors_coords(arg1, arg2)</h1>
+
+      <a href="https://github.com/BSanchez/advent-of-code-2021.git/blob/main/days/09/Day09.ex#L50" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="is_lower_point?/2">
+
+  <div class="detail-header">
+    <a href="#is_lower_point?/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">is_lower_point?(point, map)</h1>
+
+      <a href="https://github.com/BSanchez/advent-of-code-2021.git/blob/main/days/09/Day09.ex#L60" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+      <footer class="footer">
+
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.26.0) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire" translate="no">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button display-settings">
+            Settings
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>
